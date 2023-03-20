@@ -10,9 +10,12 @@ public class Categorie {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     private String nom;
 
+    public Categorie() {}
+    public Categorie(Long id) {
+        this.id = id;
+    }
     public Long getId() {
         return id;
     }

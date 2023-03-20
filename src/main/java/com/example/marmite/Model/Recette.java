@@ -20,6 +20,10 @@ public class Recette {
     @ManyToMany
     private List<Ingredient> listIngredients;
 
+    public Recette() {}
+    public Recette(Long id) {
+        this.id = id;
+    }
     public Long getId() {
         return id;
     }

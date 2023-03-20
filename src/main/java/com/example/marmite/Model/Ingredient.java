@@ -15,6 +15,11 @@ public class Ingredient {
     // @ManyToMany
     // private List<Plat> plats;
 
+    public Ingredient() {}
+    public Ingredient(Long id) {
+        this.id = id;
+    }
+
     public Long getId() {
         return id;
     }
