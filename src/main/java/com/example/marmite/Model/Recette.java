@@ -9,14 +9,16 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 
 @Entity
-public class Plat {
+public class Recette {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private  Long id;
     private String nom;
+    @ManyToMany
+    private List<Categorie> categories;
 
-    @ManyToMany(mappedBy = "plats")
+    @ManyToMany
     private List<Ingredient> listIngredients;
 
     public Long getId() {
@@ -42,4 +44,13 @@ public class Plat {
     public void setListIngredients(List<Ingredient> listIngredients) {
         this.listIngredients = listIngredients;
     }
+
+    public List<Categorie> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Categorie> categories) {
+        this.categories = categories;
+    }
+
 }
