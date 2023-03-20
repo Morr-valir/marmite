@@ -1,22 +1,19 @@
 package com.example.marmite.Model;
 
-import java.util.List;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
 
 @Entity
 public class Ingredient {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String nom;
 
-    @ManyToMany
-    private List<Plat> plats;
+    // @ManyToMany
+    // private List<Plat> plats;
 
     public Long getId() {
         return id;
@@ -34,11 +31,11 @@ public class Ingredient {
         this.nom = nom;
     }
 
-    public List<Plat> getPlats() {
-        return plats;
-    }
+    // public List<Plat> getPlats() {
+    //     return plats;
+    // }
 
-    public void setPlats(List<Plat> plats) {
-        this.plats = plats;
-    }
+    // public void setPlats(List<Plat> plats) {
+    //     this.plats = plats;
+    // }
 }
