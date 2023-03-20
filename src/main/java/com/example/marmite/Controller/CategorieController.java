@@ -17,28 +17,28 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/api")
+@RequestMapping("/api/categories")
 public class CategorieController {
     @Autowired
     private CategorieRepository categorieRepository;
 
-    @GetMapping("/categories")
+    @GetMapping("")
     public ResponseEntity<List<Categorie>> getAllCategories() {
         return ResponseEntity.ok((List<Categorie>) categorieRepository.findAll());
     }
 
-    @PostMapping("/categories")
+    @PostMapping("")
     public ResponseEntity<Categorie> createCategorie(@RequestBody Categorie categorie) {
         categorieRepository.save(categorie);
         return ResponseEntity.ok(categorie);
     }
 
-    @GetMapping("/categories/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Categorie> getCategorieById(@PathVariable Long id) {
         return ResponseEntity.ok(categorieRepository.findById(id).orElse(null));
     }
 
-    @PutMapping("/categories/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Categorie> updateCategorie(@PathVariable Long id, @RequestBody Categorie categorie) {
         Categorie categorieToUpdate = categorieRepository.findById(id).orElse(null);
         if (categorieToUpdate != null) {
@@ -50,7 +50,7 @@ public class CategorieController {
         return ResponseEntity.ok(categorieToUpdate);
     }
 
-    @DeleteMapping("/categories/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Categorie> deleteCategorie(@PathVariable Long id) {
         Categorie categorieToDelete = categorieRepository.findById(id).orElse(null);
         if (categorieToDelete != null) {

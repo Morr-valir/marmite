@@ -17,28 +17,28 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/api")
+@RequestMapping("/api/ingredients")
 public class IngredientController {
     @Autowired
     private IngredientRepository ingredientRepository;
 
-    @GetMapping("/ingredients")
+    @GetMapping("")
     public ResponseEntity<List<Ingredient>> getAllIngredients() {
         return ResponseEntity.ok((List<Ingredient>) ingredientRepository.findAll());
     }
 
-    @PostMapping("/ingredients")
+    @PostMapping("")
     public ResponseEntity<Ingredient> createIngredient(@RequestBody Ingredient ingredient) {
         ingredientRepository.save(ingredient);
         return ResponseEntity.ok(ingredient);
     }
 
-    @GetMapping("/ingredients/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Ingredient> getIngredientById(@PathVariable Long id) {
         return ResponseEntity.ok(ingredientRepository.findById(id).orElse(null));
     }
 
-    @PutMapping("/ingredients/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Ingredient> updateIngredient(@PathVariable Long id, @RequestBody Ingredient ingredient) {
         Ingredient ingredientToUpdate = ingredientRepository.findById(id).orElse(null);
         if (ingredientToUpdate != null) {
@@ -50,7 +50,7 @@ public class IngredientController {
         return ResponseEntity.ok(ingredientToUpdate);
     }
 
-    @DeleteMapping("/ingredients/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Ingredient> deleteIngredient(@PathVariable Long id) {
         Ingredient ingredientToDelete = ingredientRepository.findById(id).orElse(null);
         if (ingredientToDelete != null) {
