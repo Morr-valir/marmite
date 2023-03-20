@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -47,5 +48,16 @@ public class IngredientController {
         }
         ingredientRepository.save(ingredientToUpdate);
         return ResponseEntity.ok(ingredientToUpdate);
+    }
+
+    @DeleteMapping("/ingredients/{id}")
+    public ResponseEntity<Ingredient> deleteIngredient(@PathVariable Long id) {
+        Ingredient ingredientToDelete = ingredientRepository.findById(id).orElse(null);
+        if (ingredientToDelete != null) {
+            ingredientRepository.delete(ingredientToDelete);
+            return ResponseEntity.ok(ingredientToDelete);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
