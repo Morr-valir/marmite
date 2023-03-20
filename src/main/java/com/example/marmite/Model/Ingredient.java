@@ -11,11 +11,12 @@ public class Ingredient {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String nom;
+    private String unite;
+    private String quantite;
 
-    // @ManyToMany
-    // private List<Plat> plats;
+    public Ingredient() {
+    }
 
-    public Ingredient() {}
     public Ingredient(Long id) {
         this.id = id;
     }
@@ -36,11 +37,19 @@ public class Ingredient {
         this.nom = nom;
     }
 
-    // public List<Plat> getPlats() {
-    //     return plats;
-    // }
+    public String getUnite() {
+        return unite;
+    }
 
-    // public void setPlats(List<Plat> plats) {
-    //     this.plats = plats;
-    // }
+    public void setUnite(String unite) {
+        this.unite = unite;
+    }
+
+    public String getQuantite() {
+        return quantite;
+    }
+
+    public void setQuantite(String quantite) {
+        this.quantite = quantite;
+    }
 }
