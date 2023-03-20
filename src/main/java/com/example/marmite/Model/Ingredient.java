@@ -15,7 +15,7 @@ public class Ingredient {
     private Long id;
     private String nom;
 
-    @ManyToMany(mappedBy = "ingredients")
+    @ManyToMany
     private List<Plat> plats;
 
     public Long getId() {
