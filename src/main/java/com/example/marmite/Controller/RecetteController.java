@@ -24,12 +24,12 @@ public class RecetteController {
     @Autowired
     private RecetteRepository recetteRepository;
 
-    @GetMapping("/recette")
+    @GetMapping("/recettes")
     public List<Recette> getAllRecettes() {
         return (List<Recette>) recetteRepository.findAll();
     }
 
-    @PostMapping("/recette")
+    @PostMapping("/recettes")
     public ResponseEntity<Recette> ajouterRecette(@RequestBody Recette recette) {
         Recette nouvelleRecette = recetteRepository.save(recette);
         return ResponseEntity.created(URI.create("/api/recette/" + nouvelleRecette.getId()))
@@ -41,7 +41,7 @@ public class RecetteController {
      * @param recetteDetails
      * @return
      */
-    @PutMapping("/recette/{id}")
+    @PutMapping("/recettes/{id}")
     public ResponseEntity<Recette> modifierRecette(@PathVariable(value = "id") Long id, @RequestBody Recette recetteDetails){
         // appel du repository
         Recette recette = recetteRepository.findById(id).orElseThrow();
@@ -60,7 +60,7 @@ public class RecetteController {
      * @param id
      * @return
      */
-    @DeleteMapping("/recette/{id}")
+    @DeleteMapping("/recettes/{id}")
     public ResponseEntity<?> supprimerJoueur(@PathVariable(value = "id") Long id) {
         Recette recette = recetteRepository.findById(id).orElseThrow();
         recetteRepository.delete(recette);
