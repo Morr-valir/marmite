@@ -52,4 +52,9 @@ public class Ingredient {
     public void setQuantite(String quantite) {
         this.quantite = quantite;
     }
+
+    @Override
+    public String toString() {
+        return "Ingredient [id=" + id + ", nom=" + nom + ", unite=" + unite + ", quantite=" + quantite + "]";
+    }
 }
