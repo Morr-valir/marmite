@@ -12,13 +12,17 @@ public class Categorie {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String nom;
-    
+
     @ManyToOne
     private Categorie categorieParent;
-    public Categorie() {}
+
+    public Categorie() {
+    }
+
     public Categorie(Long id) {
         this.id = id;
     }
+
     public Long getId() {
         return id;
     }
@@ -34,11 +38,18 @@ public class Categorie {
     public void setNom(String nom) {
         this.nom = nom;
     }
+
     public Categorie getCategorieParent() {
         return categorieParent;
     }
+
     public void setCategorieParent(Categorie categorieParent) {
         this.categorieParent = categorieParent;
+    }
+
+    @Override
+    public String toString() {
+        return "Categorie [id=" + id + ", nom=" + nom + ", categorieParent=" + categorieParent + "]";
     }
 
 }

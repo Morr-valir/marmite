@@ -13,20 +13,24 @@ public class Recette {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private  Long id;
+    private Long id;
     private String nom;
     @ManyToMany
     private List<Categorie> categories;
     @ManyToMany
     private List<Ingredient> listIngredients;
 
-    public Recette() {}
+    public Recette() {
+    }
+
     public Recette(Long id) {
         this.id = id;
     }
+
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -53,6 +57,12 @@ public class Recette {
 
     public void setCategories(List<Categorie> categories) {
         this.categories = categories;
+    }
+
+    @Override
+    public String toString() {
+        return "Recette [id=" + id + ", nom=" + nom + ", categories=" + categories + ", listIngredients="
+                + listIngredients + "]";
     }
 
 }
