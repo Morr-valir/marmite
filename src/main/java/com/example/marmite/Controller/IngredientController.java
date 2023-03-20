@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import com.example.marmite.Model.Ingredient;
 import com.example.marmite.Repository.IngredientRepository;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -34,5 +35,17 @@ public class IngredientController {
     @GetMapping("/ingredients/{id}")
     public ResponseEntity<Ingredient> getIngredientById(@PathVariable Long id) {
         return ResponseEntity.ok(ingredientRepository.findById(id).orElse(null));
+    }
+
+    @PutMapping("/ingredients/{id}")
+    public ResponseEntity<Ingredient> updateIngredient(@PathVariable Long id, @RequestBody Ingredient ingredient) {
+        Ingredient ingredientToUpdate = ingredientRepository.findById(id).orElse(null);
+        if (ingredientToUpdate != null) {
+            ingredientToUpdate.setNom(ingredient.getNom());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+        ingredientRepository.save(ingredientToUpdate);
+        return ResponseEntity.ok(ingredientToUpdate);
     }
 }
