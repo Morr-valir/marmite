@@ -21,7 +21,7 @@ public class WebConfig {
         http.authorizeHttpRequests((authz) -> authz
                 .requestMatchers("/login").permitAll()
                 // .requestMatchers("/joueurs").permitAll()
-                .anyRequest().permitAll());
+                .anyRequest().authenticated());
 
         http.addFilterBefore(jwtRequestFilter,
                 UsernamePasswordAuthenticationFilter.class);
