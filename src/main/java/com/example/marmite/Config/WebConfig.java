@@ -9,23 +9,22 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.example.marmite.Config.JWT.JwtRequestFilter;
 
-
 @Configuration
 public class WebConfig {
 
-	 @Autowired
-	    private JwtRequestFilter jwtRequestFilter;
-	
-	 @Bean
-	    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-	        http.csrf().disable()
-	            .authorizeHttpRequests((authz) -> authz
-	            		//.requestMatchers("/error*").permitAll()
-	            		//.requestMatchers("/joueurs").permitAll()
-	                .anyRequest().permitAll()
-	            );
-	            
-	        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-	        return http.build();
-	    }
+    @Autowired
+    private JwtRequestFilter jwtRequestFilter;
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.csrf().disable();
+        http.authorizeHttpRequests((authz) -> authz
+                .requestMatchers("/login").permitAll()
+                // .requestMatchers("/joueurs").permitAll()
+                .anyRequest().permitAll());
+
+        http.addFilterBefore(jwtRequestFilter,
+                UsernamePasswordAuthenticationFilter.class);
+        return http.build();
+    }
 }
