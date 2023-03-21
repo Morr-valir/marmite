@@ -23,8 +23,7 @@ public class WebConfig {
                 // .requestMatchers("/joueurs").permitAll()
                 .anyRequest().authenticated());
 
-        http.addFilterBefore(jwtRequestFilter,
-                UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 }
