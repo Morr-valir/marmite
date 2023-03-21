@@ -19,7 +19,7 @@ public class WebConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.authorizeHttpRequests((authz) -> authz
-                .requestMatchers("/login").permitAll()
+                .requestMatchers("/login", "/register").permitAll()
                 // .requestMatchers("/joueurs").permitAll()
                 .anyRequest().authenticated());
 

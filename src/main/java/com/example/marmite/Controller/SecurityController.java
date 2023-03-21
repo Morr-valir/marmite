@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 
 import com.example.marmite.Config.JWT.JwtTokenUtil;
@@ -30,6 +32,15 @@ public class SecurityController {
         JwtTokenUtil jwtTokenUtil = new JwtTokenUtil();
         final String token = jwtTokenUtil.generateToken(utilisateur, secret);
         return ResponseEntity.ok(token);
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<Utilisateur> registerUser(@RequestBody Utilisateur utilisateur) throws Exception {
+        boolean utilisateurExisteDeja = utilisateurRepository.findById(utilisateur.getUsername()).orElse(null) != null;
+        if (utilisateurExisteDeja)
+            throw new Exception("L'utilisateur existe déjà");
+        utilisateurRepository.save(utilisateur);
+        return ResponseEntity.ok(utilisateur);
     }
 
     private String getUsernameInRequestHeader(Map<String, String> header) {
