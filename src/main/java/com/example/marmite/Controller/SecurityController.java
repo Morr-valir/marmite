@@ -4,6 +4,7 @@ import java.util.Base64;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +20,8 @@ public class SecurityController {
     private UtilisateurRepository utilisateurRepository;
 
     @GetMapping("/login")
-    public ResponseEntity<String> createAuthenticationToken(@RequestHeader Map<String, String> header)
+    public ResponseEntity<String> createAuthenticationToken(@RequestHeader Map<String, String> header,
+            @Value("jwt.secret") String secret)
             throws Exception {
         String username = getUsernameInRequestHeader(header);
         String password = getPasswordInRequestHeader(header);
@@ -27,7 +29,7 @@ public class SecurityController {
         Utilisateur utilisateur = utilisateurRepository.findById(username).orElse(null);
         JwtTokenUtil jwtTokenUtil = new JwtTokenUtil();
         System.out.println(utilisateur);
-        final String token = jwtTokenUtil.generateToken(utilisateur);
+        final String token = jwtTokenUtil.generateToken(utilisateur, secret);
         System.out.println(token);
         return ResponseEntity.ok(token);
         // return ResponseEntity.ok(username);

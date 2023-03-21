@@ -49,14 +49,14 @@ public class JwtTokenUtil implements Serializable {
     }
 
     // generate token for user
-    public String generateToken(UserDetails userDetails) {
+    public String generateToken(UserDetails userDetails, @Value("jwt.secret") String secret) {
         Map<String, Object> claims = new HashMap<>();
-        return doGenerateToken(claims, userDetails.getUsername());
+        return doGenerateToken(claims, userDetails.getUsername(), secret);
     }
 
-    public String generateToken(String username) {
+    public String generateToken(String username, @Value("jwt.secret") String secret) {
         Map<String, Object> claims = new HashMap<>();
-        return doGenerateToken(claims, username);
+        return doGenerateToken(claims, username, secret);
     }
 
     // while creating the token -
@@ -65,14 +65,14 @@ public class JwtTokenUtil implements Serializable {
     // 3. According to JWS Compact
     // Serialization(https://tools.ietf.org/html/draft-ietf-jose-json-web-signature-41#section-3.1)
     // compaction of the JWT to a URL-safe string
-    private String doGenerateToken(Map<String, Object> claims, String subject) {
-        System.out.println("claims:" + claims.toString() + " subject:" + subject + " secret:" + secret);
+    private String doGenerateToken(Map<String, Object> claims, String subject, @Value("jwt.secret") String secret) {
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(subject)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000))
-                .signWith(SignatureAlgorithm.HS512, secret).compact();
+                .signWith(SignatureAlgorithm.HS512, secret)
+                .compact();
     }
 
     // validate token
