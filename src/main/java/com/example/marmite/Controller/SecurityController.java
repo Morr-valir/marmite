@@ -21,18 +21,15 @@ public class SecurityController {
 
     @GetMapping("/login")
     public ResponseEntity<String> createAuthenticationToken(@RequestHeader Map<String, String> header,
-            @Value("jwt.secret") String secret)
+            @Value("${jwt.secret}") String secret)
             throws Exception {
         String username = getUsernameInRequestHeader(header);
         String password = getPasswordInRequestHeader(header);
         authenticate(username, password);
         Utilisateur utilisateur = utilisateurRepository.findById(username).orElse(null);
         JwtTokenUtil jwtTokenUtil = new JwtTokenUtil();
-        System.out.println(utilisateur);
         final String token = jwtTokenUtil.generateToken(utilisateur, secret);
-        System.out.println(token);
         return ResponseEntity.ok(token);
-        // return ResponseEntity.ok(username);
     }
 
     private String getUsernameInRequestHeader(Map<String, String> header) {

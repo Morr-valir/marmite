@@ -1,26 +1,26 @@
 package com.example.marmite.Config.JWT;
 
-import org.springframework.security.core.userdetails.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
+import com.example.marmite.Model.Utilisateur;
+import com.example.marmite.Repository.UtilisateurRepository;
 
 @Component
 public class JwtUserDetailsService implements UserDetailsService {
+
+    @Autowired
+    private UtilisateurRepository utilisateurRepository;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
-        if(username.equalsIgnoreCase("matthieu")){
-            //password au format BCRYPT
-            return new User("matthieu",
-                    "$2y$10$Iyilio1UnfqzBMCxFrz2x.oRgkxOI4v.bz8grZE8kxgfVq/7C8LcG",
-                    new ArrayList<>());
-
-        }
-        else{
+        Utilisateur user = utilisateurRepository.findById(username).orElse(null);
+        if (user != null) {
+            return user;
+        } else {
             throw new UsernameNotFoundException("Utilisateur introuvable");
         }
     }
