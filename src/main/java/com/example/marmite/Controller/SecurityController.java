@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +21,7 @@ import com.example.marmite.Repository.UtilisateurRepository;
 public class SecurityController {
     @Autowired
     private UtilisateurRepository utilisateurRepository;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @GetMapping("/login")
     public ResponseEntity<String> createAuthenticationToken(@RequestHeader Map<String, String> header,
@@ -39,6 +41,8 @@ public class SecurityController {
         boolean utilisateurExisteDeja = utilisateurRepository.findById(utilisateur.getUsername()).orElse(null) != null;
         if (utilisateurExisteDeja)
             throw new Exception("L'utilisateur existe déjà");
+        bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        utilisateur.setPassword("{bcrypt}" + bCryptPasswordEncoder.encode(utilisateur.getPassword()));
         utilisateurRepository.save(utilisateur);
         return ResponseEntity.ok(utilisateur);
     }
@@ -67,9 +71,9 @@ public class SecurityController {
         // throw new Exception("INVALID_CREDENTIALS", e);
         // }
         Utilisateur utilisateur = utilisateurRepository.findById(username).orElse(null);
-        if (utilisateur != null && !utilisateur.getPassword().equals(password)) {
+        bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        if (utilisateur != null && bCryptPasswordEncoder.matches(password, utilisateur.getPassword())) {
             throw new Exception("INVALID_CREDENTIALS");
         }
     }
-
 }
