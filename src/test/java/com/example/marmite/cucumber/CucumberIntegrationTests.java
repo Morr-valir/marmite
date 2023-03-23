@@ -12,7 +12,7 @@ import io.cucumber.spring.CucumberContextConfiguration;
 @RunWith(Cucumber.class)
 @CucumberContextConfiguration
 @SpringBootTest(classes = { MarmiteApplication.class,
-                CucumberIntegrationTests.class
+        CucumberIntegrationTests.class
 }, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @CucumberOptions(plugin = { "pretty" }, tags = "", features = "src/test/resources/features")
 public class CucumberIntegrationTests {
