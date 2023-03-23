@@ -17,6 +17,9 @@ public class Ingredient {
     public Ingredient() {
     }
 
+    /**
+     * @param id
+     */
     public Ingredient(Long id) {
         this.id = id;
     }
@@ -25,6 +28,9 @@ public class Ingredient {
         return id;
     }
 
+    /**
+     * @param id
+     */
     public void setId(Long id) {
         this.id = id;
     }
@@ -33,6 +39,9 @@ public class Ingredient {
         return nom;
     }
 
+    /**
+     * @param nom
+     */
     public void setNom(String nom) {
         this.nom = nom;
     }
@@ -41,6 +50,9 @@ public class Ingredient {
         return unite;
     }
 
+    /**
+     * @param unite
+     */
     public void setUnite(String unite) {
         this.unite = unite;
     }
@@ -49,6 +61,9 @@ public class Ingredient {
         return quantite;
     }
 
+    /**
+     * @param quantite
+     */
     public void setQuantite(String quantite) {
         this.quantite = quantite;
     }

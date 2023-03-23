@@ -27,6 +27,9 @@ public class Utilisateur implements UserDetails {
         return username;
     }
 
+    /**
+     * @param username
+     */
     public void setUsername(String username) {
         this.username = username;
     }
@@ -35,6 +38,9 @@ public class Utilisateur implements UserDetails {
         return password;
     }
 
+    /**
+     * @param password
+     */
     public void setPassword(String password) {
         this.password = password;
     }
@@ -44,6 +50,9 @@ public class Utilisateur implements UserDetails {
         return (Collection<GrantedAuthority>) authorities;
     }
 
+    /**
+     * @param authorities
+     */
     public void setAuthorities(Authorities authorities) {
         this.authorities = authorities;
     }
@@ -52,6 +61,9 @@ public class Utilisateur implements UserDetails {
         return enabled;
     }
 
+    /**
+     * @param enabled
+     */
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }

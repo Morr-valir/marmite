@@ -19,22 +19,37 @@ public class Categorie {
     public Categorie() {
     }
 
+    /**
+     * @param id
+     */
     public Categorie(Long id) {
         this.id = id;
     }
 
+    /**
+     * @return id
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * @param id
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     * @return nom
+     */
     public String getNom() {
         return nom;
     }
 
+    /**
+     * @param nom
+     */
     public void setNom(String nom) {
         this.nom = nom;
     }
@@ -43,6 +58,9 @@ public class Categorie {
         return categorieParent;
     }
 
+    /**
+     * @param categorieParent
+     */
     public void setCategorieParent(Categorie categorieParent) {
         this.categorieParent = categorieParent;
     }

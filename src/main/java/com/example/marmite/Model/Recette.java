@@ -8,6 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 
+
 @Entity
 public class Recette {
 
@@ -23,6 +24,9 @@ public class Recette {
     public Recette() {
     }
 
+    /**
+     * @param id
+     */
     public Recette(Long id) {
         this.id = id;
     }
@@ -31,6 +35,9 @@ public class Recette {
         return id;
     }
 
+    /**
+     * @param id
+     */
     public void setId(Long id) {
         this.id = id;
     }
@@ -39,6 +46,9 @@ public class Recette {
         return nom;
     }
 
+    /**
+     * @param nom
+     */
     public void setNom(String nom) {
         this.nom = nom;
     }
@@ -47,6 +57,9 @@ public class Recette {
         return listIngredients;
     }
 
+    /**
+     * @param listIngredients
+     */
     public void setListIngredients(List<Ingredient> listIngredients) {
         this.listIngredients = listIngredients;
     }
@@ -55,6 +68,9 @@ public class Recette {
         return categories;
     }
 
+    /**
+     * @param categories
+     */
     public void setCategories(List<Categorie> categories) {
         this.categories = categories;
     }
