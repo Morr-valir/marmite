@@ -19,7 +19,7 @@ public class WebConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.authorizeHttpRequests((authz) -> authz
-                .requestMatchers("/login", "/register").permitAll()
+                .requestMatchers("/login", "/register","/swagger-ui/index.html#/").permitAll()
                 // .requestMatchers("/joueurs").permitAll()
                 .anyRequest().authenticated());
 
