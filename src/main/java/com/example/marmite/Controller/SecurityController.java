@@ -48,7 +48,7 @@ public class SecurityController {
     }
 
     private String getUsernameInRequestHeader(Map<String, String> header) {
-        if( header.get("authorization") != null){
+        if( header.get("authorization") == null){
             return "Pas de autorization dans le header";
         }
         String encodedUsernamePassword = header.get("authorization").split(" ")[1];
