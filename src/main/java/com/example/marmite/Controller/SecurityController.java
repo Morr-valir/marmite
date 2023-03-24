@@ -49,12 +49,13 @@ public class SecurityController {
 
     private String getUsernameInRequestHeader(Map<String, String> header) {
         if( header.get("authorization") == null){
-            return "Pas de autorization dans le header";
+            return null;
+        }else{
+            String encodedUsernamePassword = header.get("authorization").split(" ")[1];
+            String decodedUsernamePassword = new String(Base64.getDecoder().decode(encodedUsernamePassword));
+            String username = decodedUsernamePassword.split(":")[0];
+            return username;
         }
-        String encodedUsernamePassword = header.get("authorization").split(" ")[1];
-        String decodedUsernamePassword = new String(Base64.getDecoder().decode(encodedUsernamePassword));
-        String username = decodedUsernamePassword.split(":")[0];
-        return username;
     }
 
     private String getPasswordInRequestHeader(Map<String, String> header) {
